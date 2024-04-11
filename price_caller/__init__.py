@@ -17,7 +17,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     df = pd.read_excel(f'https://{accountName}.blob.core.windows.net/{containerName}/{filename}')
     df = df[df.columns[:2]]
     latest_price = df[df.DATE == df.DATE.max()].iloc[0][1]
-    df = df[df.DATE < df.DATE.max()]
+    df = df[df.DATE < df.DATE.min()]
     previous_price = df[df.DATE == df.DATE.max()].iloc[0][1]
     performance = round((latest_price/previous_price - 1) * 100,2)
 
